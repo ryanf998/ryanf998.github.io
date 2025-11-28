@@ -12,32 +12,34 @@ body {
 .bio {
   max-width: 600px;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 60px;  /* extra space above artworks */
   font-size: 1.2rem;
 }
 
 .artworks {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center;  /* center images horizontally */
+  gap: 30px;               /* space between images */
+  flex-wrap: wrap;         /* wrap on smaller screens */
+  align-items: center;     /* vertically align if wrapping */
 }
 
 .artworks img {
   width: 250px;
   height: 250px;
   object-fit: cover;
+  border-radius: 5px;      /* subtle rounding */
   display: block;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .artworks img {
     width: 200px;
     height: 200px;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .artworks img {
     width: 150px;
     height: 150px;
