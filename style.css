@@ -1,0 +1,45 @@
+body {
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  margin: 0;
+}
+
+.bio {
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 1.2rem;
+}
+
+.artworks {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.artworks img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .artworks img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 500px) {
+  .artworks img {
+    width: 150px;
+    height: 150px;
+  }
+}
