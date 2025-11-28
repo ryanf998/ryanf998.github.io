@@ -1,5 +1,1 @@
-.artworks img.large {
-  width: 350px;   /* new width for image 2 */
-  height: 350px;  /* keep square */
-  object-fit: cover; /* ensures image fills square without stretching */
-}
+
