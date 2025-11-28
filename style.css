@@ -12,34 +12,43 @@ body {
 .bio {
   max-width: 600px;
   text-align: center;
-  margin-bottom: 60px;  /* extra space above artworks */
+  margin-bottom: 60px;
   font-size: 1.2rem;
 }
 
 .artworks {
   display: flex;
-  justify-content: center;  /* center images horizontally */
-  gap: 30px;               /* space between images */
-  flex-wrap: wrap;         /* wrap on smaller screens */
-  align-items: center;     /* vertically align if wrapping */
+  justify-content: center;   /* center images horizontally */
+  gap: 40px;                 /* space between images */
+  flex-wrap: wrap;           /* wrap on smaller screens */
+  align-items: center;
 }
 
 .artworks img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 5px;      /* subtle rounding */
+  width: 300px;              /* larger width */
+  height: 300px;             /* force square height */
+  object-fit: cover;         /* crop to fill square without stretching */
   display: block;
+  border-radius: 5px;        /* optional subtle rounding */
+  transition: transform 0.3s; /* smooth hover effect if desired */
 }
 
-@media (max-width: 900px) {
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .artworks img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 700px) {
   .artworks img {
     width: 200px;
     height: 200px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .artworks img {
     width: 150px;
     height: 150px;
