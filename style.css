@@ -1,54 +1,66 @@
+/* Reset body and allow full width */
 body {
+  margin: 0;
+  padding: 0;
   background: #fff;
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px;
-  margin: 0;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .bio {
-  max-width: 600px;
+  width: 100%;               /* span entire width */
   text-align: center;
-  margin-bottom: 60px;
-  font-size: 1.2rem;
+  margin: 60px 0;            /* vertical spacing */
+  font-size: 1.4rem;
+  padding: 0 20px;           /* small padding on mobile */
 }
 
 .artworks {
   display: flex;
-  justify-content: center;   /* center images horizontally */
-  gap: 40px;                 /* space between images */
-  flex-wrap: wrap;           /* wrap on smaller screens */
-  align-items: center;
+  justify-content: center;    /* center images horizontally */
+  flex-wrap: wrap;            /* wrap on smaller screens */
+  gap: 50px;                  /* space between images */
+  width: 100%;                /* full width */
+  padding: 0 20px;
 }
 
 .artworks img {
-  width: 300px;              /* larger width */
-  height: 300px;             /* force square height */
-  object-fit: cover;         /* crop to fill square without stretching */
+  width: 350px;               /* large size */
+  height: 350px;              /* make square */
+  object-fit: cover;          /* fill square without distortion */
   display: block;
-  border-radius: 5px;        /* optional subtle rounding */
-  transition: transform 0.3s; /* smooth hover effect if desired */
+  border-radius: 5px;         /* optional rounding */
+  transition: transform 0.3s; /* optional hover effect */
 }
 
 /* Responsive adjustments */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
+  .artworks img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 900px) {
   .artworks img {
     width: 250px;
     height: 250px;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .artworks img {
     width: 200px;
     height: 200px;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .artworks img {
     width: 150px;
     height: 150px;
