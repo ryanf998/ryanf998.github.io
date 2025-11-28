@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio • Resume</title>
+  <title>Home • Portfolio</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
     body { background: #fafafa; color: #222; line-height: 1.6; }
@@ -19,95 +19,48 @@
     .section { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     .section h2 { font-size: 2rem; margin-bottom: 20px; border-left: 5px solid #111; padding-left: 10px; }
 
-    .card { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 25px; }
+    .bio { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 40px; text-align: center; }
 
-    .skills-list, .projects-list { list-style: none; }
-    .skills-list li, .projects-list li { background: #eee; padding: 10px 15px; border-radius: 6px; margin-bottom: 10px; }
+    .artworks { display: flex; justify-content: space-between; gap: 20px; }
+    .artworks img { width: 30%; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
 
     footer { text-align: center; padding: 30px 0; margin-top: 40px; background: #111; color: #fff; font-size: 0.9rem; }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Your Name</h1>
-    <p>Finance • Analysis • Risk Management • Data • Portfolio</p>
+    <p>Artist & Portfolio Showcase</p>
   </header>
 
   <nav>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Portfolio</a>
+    <a href="skills.html">Skills</a>
+    <a href="contact.html">Contact</a>
   </nav>
 
-  <section id="about" class="section">
+  <section class="section" id="about">
     <h2>About Me</h2>
-    <div class="card">
-      <p>
-        Write a short professional summary here: who you are, what you study,
-        and what you're passionate about (finance, markets, data, risk,
-        modelling, etc.). Keep it 3–5 sentences.
-      </p>
+    <div class="bio">
+      <p>Hi! I'm [Your Name], an artist passionate about creating works that blend creativity and emotion. I specialize in digital and traditional media, and enjoy experimenting with new techniques to express ideas visually.</p>
     </div>
   </section>
 
-  <section id="experience" class="section">
-    <h2>Experience</h2>
-
-    <div class="card">
-      <h3>Role Title — Company Name</h3>
-      <p><em>Jan 2024 – Apr 2024</em></p>
-      <ul>
-        <li>Bullet describing your impact</li>
-        <li>Bullet describing something technical you did</li>
-        <li>Bullet describing measurable results</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Role Title — Company Name</h3>
-      <p><em>Sept 2023 – Dec 2023</em></p>
-      <ul>
-        <li>Bullet describing your impact</li>
-        <li>Bullet describing something technical you did</li>
-        <li>Bullet describing measurable results</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <ul class="projects-list">
-      <li>
-        <strong>Project Name:</strong> Brief description of what it does and why it matters.
-      </li>
-      <li>
-        <strong>Project Name:</strong> Something technical, analytical, or finance-related.
-      </li>
-    </ul>
-  </section>
-
-  <section id="skills" class="section">
-    <h2>Skills</h2>
-    <ul class="skills-list">
-      <li>Python, SQL, Excel, Power BI</li>
-      <li>Financial Modelling, Risk Management</li>
-      <li>SAS, Data Analysis, Forecasting</li>
-      <li>Bloomberg, Corporate Finance, Valuation</li>
-    </ul>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <div class="card">
-      <p>Email: yourname@example.com</p>
-      <p>LinkedIn: linkedin.com/in/your-link</p>
+  <section class="section" id="artworks">
+    <h2>My Artworks</h2>
+    <div class="artworks">
+      <img src="art1.jpg" alt="Artwork 1">
+      <img src="art2.jpg" alt="Artwork 2">
+      <img src="art3.jpg" alt="Artwork 3">
     </div>
   </section>
 
   <footer>
-    &copy; 2025 Your Name — Portfolio & Resume Website
+    &copy; 2025 Your Name — Portfolio
   </footer>
+
 </body>
 </html>
