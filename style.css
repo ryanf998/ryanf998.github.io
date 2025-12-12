@@ -1,1 +1,63 @@
+/* Make body full page and allow absolute positioning */
+body {
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin: 0;
+  width: 100%;
+  position: relative;
+}
+
+/* LinkedIn top-right link */
+.linkedin {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1rem;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+.linkedin:hover {
+  text-decoration: underline;
+}
+
+/* Bio text */
+.bio {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  font-size: 1.4rem;
+  width: 100%;
+}
+
+/* Artworks container */
+.artworks {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* All images default size */
+.artworks img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  border-radius: 5px;
+}
+
+/* Larger second image (art2) */
+.artworks img.large {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+}
+
 
