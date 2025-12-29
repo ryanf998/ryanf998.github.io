@@ -1,7 +1,7 @@
 <script>
 const track = document.getElementById("artworks");
 const images = track.children;
-const imageWidth = 340; // width + gap
+const imageWidth = images[0].offsetWidth + 40; // width + gap
 let index = 0;
 
 function update() {
@@ -25,3 +25,4 @@ function prev() {
 // initialize
 update();
 </script>
+
