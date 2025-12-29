@@ -1,72 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const viewport = document.querySelector(".viewport");
+  const viewport = document.getElementById("viewport");
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
 
-  const gap = 20;
-  const visibleCount = 5;
-  let index = 2; // center image on load
+  const gap = 40;
+  let index = 2; // start centered (5 visible → middle = 2)
 
   function imageWidth() {
-    return images[0].offsetWidth;
+    return images[0].offsetWidth + gap;
   }
 
-  function sizeViewport() {
-    const width =
-      visibleCount * imageWidth() +
-      (visibleCount - 1) * gap;
-
-    viewport.style.width = `${width}px`;
-  }
-
-  function update() {
-    const viewportCenter = viewport.offsetWidth / 2;
-
-    const imageCenter =
-      index * (imageWidth() + gap) + imageWidth() / 2;
-
-    const offset = imageCenter - viewportCenter;
-
-    const maxOffset =
-      track.scrollWidth - viewport.offsetWidth;
-
-    const clamped = Math.max(0, Math.min(offset, maxOffset));
-
-    track.style.transform = `translateX(${-clamped}px)`;
-    track.style.transition = "transform 0.45s ease";
-
+  function scrollToIndex(i) {
+    index = Math.max(0, Math.min(images.length - 1, i));
+    viewport.scrollTo({
+      left: index * imageWidth(),
+      behavior: "smooth"
+    });
     updateActive();
   }
 
   function updateActive() {
-    images.forEach(img =>
-      img.classList.remove("active", "near")
-    );
+    images.forEach(img => img.classList.remove("active", "near"));
 
-    images[index]?.classList.add("active");
-    images[index - 1]?.classList.add("near");
-    images[index + 1]?.classList.add("near");
+    images[index].classList.add("active");
+    if (images[index - 1]) images[index - 1].classList.add("near");
+    if (images[index + 1]) images[index + 1].classList.add("near");
   }
 
   window.nextSlide = () => {
-    if (index < images.length - 1) {
-      index++;
-      update();
-    }
+    scrollToIndex(index + 1);
   };
 
   window.prevSlide = () => {
-    if (index > 0) {
-      index--;
-      update();
-    }
+    scrollToIndex(index - 1);
   };
 
-  window.addEventListener("resize", () => {
-    sizeViewport();
-    update();
-  });
-
-  sizeViewport();
-  update();
+  // Initial state
+  scrollToIndex(index);
 });
