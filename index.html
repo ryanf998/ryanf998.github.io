@@ -16,6 +16,20 @@ body {
   width: 100%;
 }
 
+.header-links {
+  width: 100%;
+  text-align: center;
+  margin-top: 18px;
+  white-space: nowrap;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-links a {
+  margin: 0 8px;
+  text-decoration: none;
+  color: #000;
+}
+
 .bio {
   text-align: center;
   margin-top: 10px;
@@ -27,55 +41,31 @@ body {
 
 .bio p:first-child { font-size: 1.4rem; margin-bottom: 12px; }
 
-.carousel {
-  position: relative;
+/* Gallery */
+.gallery {
+  display: flex;
   width: 100%;
-  display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 5px;
   overflow: hidden;
-  padding: 0;
+  padding: 0 10px; /* sliver peek at edges */
 }
 
-.viewport {
-  overflow: hidden;
-  position: relative;
-  width: 1000px;
-}
-
-.artworks {
-  display: flex;
-  gap: 10px;
-  flex-wrap: nowrap;
-  transition: transform 0.5s ease;
-}
-
-.artworks img {
-  height: 325px;
-  object-fit: cover;
+.gallery img {
+  flex: 1 1 auto;              /* stretch images to fit evenly */
+  max-width: calc((100% / 9) - 4px); /* 9 images minus gap */
+  height: 250px;               /* fixed height */
+  object-fit: contain;         /* keep original aspect ratio */
   border-radius: 5px;
-  display: block;
-  transition: width 0.4s ease, opacity 0.4s ease;
-}
-
-.artworks img.side { width: 180px; opacity: 0.3; }
-.artworks img.near { width: 260px; opacity: 0.6; }
-.artworks img.active { width: 300px; opacity: 1; }
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  background: rgba(255,255,255,0.8);
-  border: none;
   cursor: pointer;
-  z-index: 20;
+  transition: transform 0.3s ease;
 }
 
-.arrow.left { left: 20px; }
-.arrow.right { right: 20px; }
+.gallery img:hover {
+  transform: scale(1.05);      /* subtle zoom on hover */
+}
 
+/* Lightbox overlay */
 .lightbox {
   display: none;
   position: fixed;
@@ -106,9 +96,9 @@ body {
 </head>
 <body>
 
-<div style="width:100%; text-align:center; margin-top:18px;">
+<div class="header-links">
   <a href="https://www.linkedin.com/in/ryan-fang-uw/" target="_blank">LinkedIn</a>
-  &nbsp;|&nbsp;
+  |
   <a href="https://www.instagram.com/ryan.airt/" target="_blank">My Art</a>
 </div>
 
@@ -117,23 +107,16 @@ body {
   <p>I’m a Mathematics student majoring in Financial Analysis and Risk Management at the University of Waterloo. I’m building a strong foundation in finance, statistics, and data analysis, with a strong interest in applying quantitative methods to real-world financial problems.</p>
 </div>
 
-<div class="carousel">
-  <button class="arrow left" onclick="prevSlide()">←</button>
-  <button class="arrow right" onclick="nextSlide()">→</button>
-
-  <div class="viewport" id="viewport">
-    <div class="artworks" id="artworks">
-      <img src="images/art1.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art4.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art3.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art5.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art6.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art7.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art8.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art9.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art10.jpg" onclick="openLightbox(this.src)">
-    </div>
-  </div>
+<div class="gallery">
+  <img src="images/art1.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art2.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art3.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art4.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art5.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art6.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art7.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art8.jpg" onclick="openLightbox(this.src)">
+  <img src="images/art9.jpg" onclick="openLightbox(this.src)">
 </div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -141,6 +124,6 @@ body {
   <img id="lightbox-img" src="">
 </div>
 
-<script src="script.js" defer></script>
+<script src="script.js"></script>
 </body>
 </html>
