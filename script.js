@@ -1,33 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
-  
-  // --- CLONE IMAGES FOR INFINITE LOOP ---
   let images = Array.from(track.children);
 
-  // Clone last 2 to start
+  const gap = 40;
+  const visibleCount = 5;
+
+  // --- CLONE IMAGES FOR INFINITE LOOP ---
   images.slice(-2).forEach(img => {
     const clone = img.cloneNode(true);
-    clone.dataset.clone = "true"; // mark clones
+    clone.dataset.clone = "true";
     track.insertBefore(clone, track.firstChild);
   });
 
-  // Clone first 2 to end
   images.slice(0, 2).forEach(img => {
     const clone = img.cloneNode(true);
     clone.dataset.clone = "true";
     track.appendChild(clone);
   });
 
-  // Re-assign images array
   images = Array.from(track.children);
-
-  const realCount = images.length - 4; // total minus 2 clones at start + 2 at end
-
-  // --- INITIAL INDEX ---
+  const realCount = images.length - 4; // total images minus 2 start + 2 end clones
   let index = 2; // first real image
-
-  const gap = 40;
-  const visibleCount = 5;
 
   function sizeViewport() {
     const imageWidth = images[0].offsetWidth;
@@ -37,23 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateActive() {
     images.forEach(img => img.classList.remove("active", "near"));
-
     const center = index + Math.floor(visibleCount / 2);
     const active = images[center];
 
     if (!active) return;
 
-    // Only highlight real images
-    if (!active.dataset.clone) {
-      active.classList.add("active");
-      if (images[center - 1]) images[center - 1].classList.add("near");
-      if (images[center + 1]) images[center + 1].classList.add("near");
-    }
+    active.classList.add("active");
+    if (images[center - 1]) images[center - 1].classList.add("near");
+    if (images[center + 1]) images[center + 1].classList.add("near");
   }
 
   function update() {
     const imageWidth = images[0].offsetWidth;
-    const peekOffset = 0.2 * imageWidth; // 0.2 image visible on left
+    const peekOffset = 0.2 * imageWidth; // 0.2 peek on left
+    track.style.transform = `translateX(${-index * (imageWidth + gap) + peekOffset}px)`;
     track.style.transition = "transform 0.5s ease";
     updateActive();
   }
@@ -61,11 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
   window.nextSlide = function() {
     index++;
     update();
-  
-    if (index >= realCount + 2) { // +2 because first two are clones
+
+    if (index >= realCount + 2) {
       setTimeout(() => {
         track.style.transition = "none";
-        index = 2; // first real image
+        index = 2;
         update();
         setTimeout(() => track.style.transition = "transform 0.5s ease", 0);
       }, 500);
@@ -75,23 +65,22 @@ document.addEventListener("DOMContentLoaded", () => {
   window.prevSlide = function() {
     index--;
     update();
-  
-    if (index < 2) { // first two are clones
+
+    if (index < 2) {
       setTimeout(() => {
         track.style.transition = "none";
-        index = realCount + 1; // last real image
+        index = realCount + 1;
         update();
         setTimeout(() => track.style.transition = "transform 0.5s ease", 0);
       }, 500);
     }
   };
 
-window.addEventListener("load", () => {
-  sizeViewport();
-  update();
+  // --- INITIALIZE ---
+  window.addEventListener("load", () => {
+    sizeViewport();
+    update();
+  });
+
+  window.addEventListener("resize", sizeViewport);
 });
-
-
-
-
-
