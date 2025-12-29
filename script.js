@@ -33,13 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- UPDATE ACTIVE IMAGE ---
   function updateActive() {
     images.forEach(img => img.classList.remove("active", "near"));
-    const center = index + Math.floor(visibleCount / 2);
-    const active = images[center];
-    if (!active) return;
-
-    active.classList.add("active");
-    if (images[center - 1]) images[center - 1].classList.add("near");
-    if (images[center + 1]) images[center + 1].classList.add("near");
+  
+    const imageWidth = images[0].offsetWidth;
+    const gap = 40;
+    const viewport = document.querySelector('.viewport');
+    const viewportCenter = viewport.offsetWidth / 2;
+  
+    // Find image whose center is closest to viewport center
+    let closestIndex = 0;
+    let closestDist = Infinity;
+  
+    images.forEach((img, i) => {
+      const imgLeft = i * (imageWidth + gap) - track.offsetLeft;
+      const imgCenter = imgLeft + imageWidth / 2;
+      const dist = Math.abs(viewportCenter - imgCenter);
+  
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIndex = i;
+      }
+    });
+  
+    images[closestIndex].classList.add("active");
+    if (images[closestIndex - 1]) images[closestIndex - 1].classList.add("near");
+    if (images[closestIndex + 1]) images[closestIndex + 1].classList.add("near");
   }
 
   // --- UPDATE TRACK POSITION ---
@@ -88,4 +105,5 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   });
 });
+
 
