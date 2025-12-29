@@ -60,7 +60,10 @@ html, body {
   transform: scale(0.9);
 }
 
-
+.artworks img.near {
+  opacity: 0.65;
+  transform: scale(0.95);
+}
 
 .artworks img:hover {
   transform: scale(1.06) translateY(-6px);  /* subtle lift effect */
@@ -79,7 +82,7 @@ html, body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  padding: 0 60px; /* give room for peeks on sides */
+  padding: 0; /* give room for peeks on sides */
   box-sizing: border-box;
 }
 
@@ -124,7 +127,8 @@ html, body {
   top: 50%;              /* vertically center */
   transform: translateY(-50%);
 }
-//end
+
+
 
 
 
