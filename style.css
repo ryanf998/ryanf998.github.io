@@ -10,9 +10,6 @@ body {
   margin: 0;
   width: 100%;
   position: relative;
-}
-
-html, body {
   overflow-x: hidden;
 }
 
@@ -125,6 +122,7 @@ html, body {
   top: 50%;              /* vertically center */
   transform: translateY(-50%);
 }
+
 
 
 
