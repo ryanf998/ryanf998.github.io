@@ -3,18 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const images = track.children;
   const gap = 40;
 
-  const visibleCount = 3;
+  const visibleCount = 5;
   const peekRatio = 0.3;
   let index = 0;
 
   function sizeViewport() {
     const imageWidth = images[0].offsetWidth;
-
+  
     const viewportWidth =
       visibleCount * imageWidth +
-      (visibleCount - 1) * gap +
-      2 * peekRatio * imageWidth;
-
+      (visibleCount - 1) * gap;
+  
     document.querySelector(".viewport").style.width = `${viewportWidth}px`;
   }
 
@@ -63,5 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
 
