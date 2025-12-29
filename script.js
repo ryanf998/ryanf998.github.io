@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
   const peekRatio = 0.2;
-  const gap = 40;
+  const gap = 20;
   const visibleCount = 5;
   let index = 2; // center image
 
@@ -58,4 +58,5 @@ document.addEventListener("DOMContentLoaded", () => {
   sizeViewport();
   scrollToIndex(index);
 });
+
 
