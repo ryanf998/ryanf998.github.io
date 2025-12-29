@@ -16,20 +16,21 @@ body {
   width: 100%;
 }
 
-.header-links {
+/* Links at top */
+.links {
   width: 100%;
   text-align: center;
   margin-top: 18px;
-  white-space: nowrap;
   font-family: Arial, Helvetica, sans-serif;
 }
-
-.header-links a {
-  margin: 0 8px;
+.links a {
   text-decoration: none;
   color: #000;
+  font-weight: bold;
+  margin: 0 5px;
 }
 
+/* Bio */
 .bio {
   text-align: center;
   margin-top: 10px;
@@ -38,31 +39,39 @@ body {
   max-width: 960px;
   padding: 0 20px;
 }
-
 .bio p:first-child { font-size: 1.4rem; margin-bottom: 12px; }
 
-/* Gallery */
+/* Gallery slices */
 .gallery {
   display: flex;
-  width: 100%;
   justify-content: center;
   gap: 5px;
-  overflow: hidden;
-  padding: 0 10px; /* sliver peek at edges */
+  height: 325px;       /* height of slices */
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 40px;
 }
 
-.gallery img {
-  flex: 1 1 auto;              /* stretch images to fit evenly */
-  max-width: calc((100% / 9) - 4px); /* 9 images minus gap */
-  height: 250px;               /* fixed height */
-  object-fit: contain;         /* keep original aspect ratio */
+.slice {
+  width: 50px;         /* width of each slice */
+  height: 325px;
+  overflow: hidden;    /* crop the image */
+  position: relative;
   border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
-.gallery img:hover {
-  transform: scale(1.05);      /* subtle zoom on hover */
+.slice img {
+  position: absolute;
+  top: 50%;            /* center vertically */
+  left: 50%;           /* center horizontally */
+  height: 325px;       /* match container height */
+  transform: translate(-50%, -50%);
+  object-fit: cover;   /* fill slice without distortion */
+  transition: transform 0.3s ease;
+}
+.slice:hover img {
+  transform: translate(-50%, -50%) scale(1.2); /* slight zoom on hover */
 }
 
 /* Lightbox overlay */
@@ -96,34 +105,37 @@ body {
 </head>
 <body>
 
-<div class="header-links">
+<!-- Top Links -->
+<div class="links">
   <a href="https://www.linkedin.com/in/ryan-fang-uw/" target="_blank">LinkedIn</a>
   |
   <a href="https://www.instagram.com/ryan.airt/" target="_blank">My Art</a>
 </div>
 
+<!-- Bio -->
 <div class="bio">
   <p>Hi, I'm Ryan.</p>
   <p>I’m a Mathematics student majoring in Financial Analysis and Risk Management at the University of Waterloo. I’m building a strong foundation in finance, statistics, and data analysis, with a strong interest in applying quantitative methods to real-world financial problems.</p>
 </div>
 
+<!-- Gallery of Slices -->
 <div class="gallery">
-  <img src="images/art1.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art2.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art3.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art4.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art5.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art6.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art7.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art8.jpg" onclick="openLightbox(this.src)">
-  <img src="images/art9.jpg" onclick="openLightbox(this.src)">
+  <div class="slice"><img src="images/art1.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art2.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art3.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art4.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art5.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art6.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art7.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art8.jpg" onclick="openLightbox(this.src)"></div>
+  <div class="slice"><img src="images/art9.jpg" onclick="openLightbox(this.src)"></div>
 </div>
 
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <span class="close" onclick="closeLightbox()">×</span>
   <img id="lightbox-img" src="">
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>
