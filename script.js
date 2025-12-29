@@ -79,12 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // --- INITIALIZE ---
-  window.addEventListener("load", () => {
+  window.onload = () => {
     sizeViewport();
     update();
-  });
+  };
   window.addEventListener("resize", () => {
     sizeViewport();
     update();
   });
 });
+
