@@ -86,9 +86,9 @@ html, body {
 .viewport {
   overflow: hidden;
   position: relative;
-  padding: 0;
-  box-sizing: border-box;
   width: auto;
+  padding: 0; /* remove extra padding for proper alignment */
+  box-sizing: border-box;
 }
 
 /* Artworks container */
@@ -125,6 +125,7 @@ html, body {
   transform: translateY(-50%);
 }
 //end
+
 
 
 
