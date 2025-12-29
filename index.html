@@ -48,15 +48,20 @@
       display: block;
       border-radius: 5px;     /* optional rounding */
           /* animation setup */
-      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.25s ease, opacity 0.4s ease;
       will-change: transform;
-      opacity: 0.4;
-      transform: scale(0.9);
+      opacity: 0.35;
+      transform: scale(0.85);
     }
 
+    .artworks img.near {
+      opacity: 0.6;
+      transform: scale(0.93);
+    }
+    
     .artworks img.active {
       opacity: 1;
-      transform: scale(1.05);
+      transform: scale(1);
     }
 
     .artworks img:hover {
@@ -220,6 +225,7 @@
 </script>
 </body>
 </html>
+
 
 
 
