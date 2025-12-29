@@ -94,7 +94,7 @@ body {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  position: relative;  /* ensures they stay outside of images */
+  position: relative;  /* default, will override for left/right */
   z-index: 10;
 }
 
@@ -105,12 +105,17 @@ body {
 .arrow.left {
   position: absolute;
   left: 0;
+  top: 50%;              /* vertically center */
+  transform: translateY(-50%);
 }
 
 .arrow.right {
   position: absolute;
   right: 0;
+  top: 50%;              /* vertically center */
+  transform: translateY(-50%);
 }
+
 
 
 
