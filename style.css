@@ -68,16 +68,15 @@ body {
 }
 
 .carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
   position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .viewport {
-  width: 760px;  /* adjust: bigger = more side image visible, smaller = less */
+  width: 760px;
   overflow: hidden;
 }
 
@@ -115,6 +114,7 @@ body {
   transform: translateY(-50%);
 }
 //end
+
 
 
 
