@@ -86,10 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+window.addEventListener("load", () => {
   sizeViewport();
   update();
-  window.addEventListener("resize", sizeViewport);
 });
+
 
 
 
