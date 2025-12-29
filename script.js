@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gap = 40;
   let index = 0;
   const visibleCount = 3;
+  const peekRatio = 0.3;
 
   function stepSize() {
     return images[0].offsetWidth + gap;
@@ -24,18 +25,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  function sizeViewport() {
+    const imageWidth = images[0].offsetWidth;
+    const viewportWidth =
+      visibleCount * imageWidth +
+      (visibleCount - 1) * gap +
+      peekRatio * imageWidth * 2;
+  
+    document.querySelector(".viewport").style.width = `${viewportWidth}px`;
+  }
+
   function update() {
     const viewport = document.querySelector(".viewport");
-    const viewportWidth = viewport.offsetWidth;
     const imageWidth = images[0].offsetWidth;
   
-    const visibleWidth = visibleCount * imageWidth + (visibleCount - 1) * gap;
-    const offset = (viewportWidth - visibleWidth) / 2;
+    const visibleWidth =
+      visibleCount * imageWidth +
+      (visibleCount - 1) * gap;
+  
+    const peek = peekRatio * imageWidth * 2; // both sides
+    const offset = (viewport.offsetWidth - visibleWidth - peek) / 2;
   
     track.style.transform = `translateX(${offset - index * (imageWidth + gap)}px)`;
   }
 
   update();
 });
+
 
 
