@@ -12,6 +12,10 @@ body {
   position: relative;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 /* LinkedIn top-right link */
 .linkedin {
   position: absolute;
@@ -114,6 +118,7 @@ body {
   transform: translateY(-50%);
 }
 //end
+
 
 
 
