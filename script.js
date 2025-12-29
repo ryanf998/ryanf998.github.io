@@ -1,30 +1,37 @@
 <script>
-const track = document.getElementById("artworks");
-const images = track.children;
-const gap = 40; // same as CSS gap
-let index = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("artworks");
+  const images = track.children;
 
-function update() {
-  const imageWidth = images[0].offsetWidth; // current image width
-  track.style.transform = `translateX(-${index * (imageWidth + gap)}px)`;
-}
+  const imageWidth = 300;
+  const gap = 40;
+  const step = imageWidth + gap;
 
-function next() {
-  if (index < images.length - 3) { // 3 images visible (peek style)
-    index++;
-    update();
+  let index = 0;
+  const visibleCount = 2;
+
+  window.next = function () {
+    if (index < images.length - visibleCount) {
+      index++;
+      update();
+    }
+  };
+
+  window.prev = function () {
+    if (index > 0) {
+      index--;
+      update();
+    }
+  };
+
+  function update() {
+    track.style.transform = `translateX(-${index * step}px)`;
   }
-}
 
-function prev() {
-  if (index > 0) {
-    index--;
-    update();
-  }
-}
+  update();
+});
 
-// initialize
-update();
 </script>
+
 
 
