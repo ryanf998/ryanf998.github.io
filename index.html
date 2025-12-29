@@ -113,31 +113,23 @@
   }
 
   .arrow {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    position: relative;  /* default, will override for left/right */
-    z-index: 10;
-  }
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(255,255,255,0.8);
+      border: none;
+      cursor: pointer;
+      z-index: 20;
+    }
 
-  .arrow:hover {
-    opacity: 0.5;
-  }
-  
-  .arrow.left {
-    position: absolute;
-    left: 0;
-    top: 50%;              /* vertically center */
-    transform: translateY(-50%);
-  }
-  
-  .arrow.right {
-    position: absolute;
-    right: 0;
-    top: 50%;              /* vertically center */
-    transform: translateY(-50%);
-  }
+    .arrow.left {
+      left: 20px;
+    }
+
+    .arrow.right {
+      right: 20px;
+    }
 
 
     
@@ -203,6 +195,7 @@
 </script>
 </body>
 </html>
+
 
 
 
