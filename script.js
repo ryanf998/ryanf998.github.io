@@ -3,26 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const images = track.children;
 
   const gap = 40;
-
-  function getStep() {
-    return track.children[0].offsetWidth + gap;
-  }
-  
-  function update() {
-    track.style.transform = `translateX(-${index * getStep()}px)`;
-  }
-
   let index = 0;
   const visibleCount = 2;
 
-  window.next = function () {
+  function stepSize() {
+    return images[0].offsetWidth + gap;
+  }
+
+  window.nextSlide = function () {
     if (index < images.length - visibleCount) {
       index++;
       update();
     }
   };
 
-  window.prev = function () {
+  window.prevSlide = function () {
     if (index > 0) {
       index--;
       update();
@@ -30,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function update() {
-    track.style.transform = `translateX(-${index * step}px)`;
+    track.style.transform = `translateX(-${index * stepSize()}px)`;
   }
 
   update();
