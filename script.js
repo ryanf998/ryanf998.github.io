@@ -2,39 +2,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const viewport = document.querySelector(".viewport");
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
-  const peekRatio = 0.2;
+
   const gap = 10;
-  const visibleCount = 5;
-  let index = 2; // center image
+  const fullVisible = 4;   // full images in the middle
+  const peekRatio = 0.2;   // left + right peek
+  let index = 0;
 
-  function imageWidth() {
-    return images[0].offsetWidth;
+  function getImageWidth() {
+    return images[0].getBoundingClientRect().width;
   }
 
-  // LOCK viewport width → ensures 0.2 | 1 | 1 | 1 | 0.2
   function sizeViewport() {
-    const imageWidth = images[0].offsetWidth;
-  
-    // 5 images minus 2 peeks (left + right)
-    const viewportWidth =
-      (visibleCount - 2 * peekRatio) * imageWidth +
-      (visibleCount - 1) * gap;
-  
-    const viewport = document.querySelector(".viewport");
-    viewport.style.width = `${viewportWidth}px`;
+    const imgW = getImageWidth();
+
+    const width =
+      (fullVisible + 2 * peekRatio) * imgW +
+      (fullVisible + 1) * gap;
+
+    viewport.style.width = `${width}px`;
   }
 
-  function scrollToIndex(i) {
-    index = Math.max(0, Math.min(images.length - 1, i));
+  function update() {
+    const imgW = getImageWidth();
+    const offset = index * (imgW + gap);
 
-    const viewportCenter = viewport.offsetWidth / 2;
-    const imageCenter =
-      index * (imageWidth() + gap) + imageWidth() / 2;
-
-    viewport.scrollTo({
-      left: imageCenter - viewportCenter,
-      behavior: "smooth"
-    });
+    track.style.transform = `translateX(${-offset}px)`;
+    track.style.transition = "transform 0.5s ease";
 
     updateActive();
   }
@@ -47,17 +40,25 @@ document.addEventListener("DOMContentLoaded", () => {
     images[index + 1]?.classList.add("near");
   }
 
-  window.nextSlide = () => scrollToIndex(index + 1);
-  window.prevSlide = () => scrollToIndex(index - 1);
+  window.nextSlide = () => {
+    if (index < images.length - fullVisible) {
+      index++;
+      update();
+    }
+  };
+
+  window.prevSlide = () => {
+    if (index > 0) {
+      index--;
+      update();
+    }
+  };
 
   window.addEventListener("resize", () => {
     sizeViewport();
-    scrollToIndex(index);
+    update();
   });
 
   sizeViewport();
-  scrollToIndex(index);
+  update();
 });
-
-
-
