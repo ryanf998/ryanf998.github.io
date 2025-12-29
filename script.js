@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
-  const realCount = images.length - 4; // total minus 2 clones at start + 2 at end
   
   // --- CLONE IMAGES FOR INFINITE LOOP ---
   let images = Array.from(track.children);
@@ -21,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Re-assign images array
   images = Array.from(track.children);
+
+  const realCount = images.length - 4; // total minus 2 clones at start + 2 at end
 
   // --- INITIAL INDEX ---
   let index = 2; // first real image
@@ -90,5 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
 
