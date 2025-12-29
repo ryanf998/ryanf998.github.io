@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const viewport = document.querySelector(".viewport");
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
-
+  const peekRatio = 0.2;
   const gap = 40;
   const visibleCount = 5;
   let index = 2; // center image
@@ -13,10 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // LOCK viewport width → ensures 0.2 | 1 | 1 | 1 | 0.2
   function sizeViewport() {
-    const width =
-      visibleCount * imageWidth() +
+    const imageWidth = images[0].offsetWidth;
+  
+    // 5 images minus 2 peeks (left + right)
+    const viewportWidth =
+      (visibleCount - 2 * peekRatio) * imageWidth +
       (visibleCount - 1) * gap;
-    viewport.style.width = `${width}px`;
+  
+    const viewport = document.querySelector(".viewport");
+    viewport.style.width = `${viewportWidth}px`;
   }
 
   function scrollToIndex(i) {
@@ -53,3 +58,4 @@ document.addEventListener("DOMContentLoaded", () => {
   sizeViewport();
   scrollToIndex(index);
 });
+
