@@ -26,25 +26,35 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- UPDATE TRACK POSITION ---
   function update() {
     const imageWidth = images[0].offsetWidth;
-    const peekOffset = 0.2 * imageWidth; // show small peek of left image
-    track.style.transform = `translateX(${-index * (imageWidth + gap) + peekOffset}px)`;
-    track.style.transition = "transform 0.5s ease";
-    updateActive();
+    const trackWidth = images.length * (imageWidth + gap) - gap; // total track width
+    const viewport = document.querySelector('.viewport');
+    const viewportWidth = viewport.offsetWidth;
+  
+    let translate = -index * (imageWidth + gap);
+  
+    // if the track is too short on the right, shift it back
+    if (translate + trackWidth < viewportWidth) {
+      translate = viewportWidth - trackWidth;
+    }
+  
+    track.style.transform = `translateX(${translate}px)`;
   }
 
-window.nextSlide = function() {
-  if (index < images.length - visibleCount) { // stop at last visible set
-    index++;
-    update();
-  }
-};
-
-window.prevSlide = function() {
-  if (index > 0) {
-    index--;
-    update();
-  }
-};
+  window.nextSlide = function() {
+    // max index = total images - 1 (so last image is at the right edge)
+    const maxIndex = images.length - 1;
+    if (index < maxIndex) {
+      index++;
+      update();
+    }
+  };
+  
+  window.prevSlide = function() {
+    if (index > 0) {
+      index--;
+      update();
+    }
+  };
 
   // --- INITIALIZE ---
   sizeViewport();
@@ -54,4 +64,5 @@ window.prevSlide = function() {
     update();
   });
 });
+
 
