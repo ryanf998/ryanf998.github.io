@@ -55,7 +55,9 @@ html, body {
   object-fit: cover;
   display: block;
   border-radius: 5px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+  opacity: 0.4;
+  transform: scale(0.9);
 }
 
 
@@ -69,6 +71,11 @@ html, body {
 .artworks img:hover {
   transform: scale(1.06) translateY(-6px);  /* subtle lift effect */
   box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+}
+
+.artworks img.active {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .carousel {
@@ -120,6 +127,7 @@ html, body {
   transform: translateY(-50%);
 }
 //end
+
 
 
 
