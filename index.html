@@ -112,7 +112,21 @@
     cursor: pointer;
     user-select: none;
   }
+    
+  .carousel {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+  }
 
+  .viewport {
+    width: 760px;
+    overflow: hidden;
+    position: relative;
+  }
   .arrow {
       position: absolute;
       top: 50%;
@@ -122,15 +136,15 @@
       border: none;
       cursor: pointer;
       z-index: 20;
-    }
+  }
 
-    .arrow.left {
-      left: 20px;
-    }
+  .arrow.left {
+    left: 20px;
+  }
 
-    .arrow.right {
-      right: 20px;
-    }
+  .arrow.right {
+    right: 20px;
+  }
 
 
     
@@ -196,6 +210,7 @@
 </script>
 </body>
 </html>
+
 
 
 
