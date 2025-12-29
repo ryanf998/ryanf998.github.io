@@ -3,17 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
   const gap = 10;
-  const visibleCount = 3;   // 3 full images
+  const visibleCount = 5;   // 3 full images
   const peekRatio = 0.2;    // peek on each side
-  let index = 1;             // start with second image centered
+  let index = 2;             // start with second image centered
 
   function imgWidth() {
     return images[0].offsetWidth;
   }
 
-  // Set viewport width for 3 full images + 0.2 peek each side
+  // Compute viewport width for 3 full images + 0.2 peek each side
   function sizeViewport() {
-    const vw = (visibleCount + 2 * peekRatio) * imgWidth() + (visibleCount - 1) * gap;
+    const vw = (3 + 2 * peekRatio) * imgWidth() + (3 - 1) * gap;
     viewport.style.width = `${vw}px`;
   }
 
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateScale();
   }
 
-  // Update scaling and opacity for center + adjacent images
+  // Scale images for dynamic effect
   function updateScale() {
     images.forEach((img, idx) => {
       img.style.transition = "transform 0.4s ease, opacity 0.4s ease";
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     images[index].style.transform = "scale(1)";
     images[index].style.opacity = "1";
 
-    // adjacent images
+    // near images (left/right of center)
     if (images[index - 1]) {
       images[index - 1].style.transform = "scale(0.9)";
       images[index - 1].style.opacity = "0.6";
@@ -65,3 +65,4 @@ document.addEventListener("DOMContentLoaded", () => {
   sizeViewport();
   scrollToIndex(index);
 });
+
