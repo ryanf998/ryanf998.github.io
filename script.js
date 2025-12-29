@@ -25,8 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function update() {
-    track.style.transform = `translateX(-${index * stepSize()}px)`;
+    const viewport = document.querySelector(".viewport");
+    const viewportWidth = viewport.offsetWidth;
+    const imageWidth = images[0].offsetWidth;
+  
+    const visibleWidth = visibleCount * imageWidth + (visibleCount - 1) * gap;
+    const offset = (viewportWidth - visibleWidth) / 2;
+  
+    track.style.transform = `translateX(${offset - index * (imageWidth + gap)}px)`;
   }
 
   update();
 });
+
