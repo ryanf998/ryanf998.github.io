@@ -32,14 +32,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  function updateActive() {
+    [...images].forEach(img => img.classList.remove("active"));
+  
+    const centerIndex = index + Math.floor(visibleCount / 2);
+    if (images[centerIndex]) {
+      images[centerIndex].classList.add("active");
+    }
+  }
+  
   function update() {
     const imageWidth = images[0].offsetWidth;
     const peekOffset = peekRatio * imageWidth;
 
     track.style.transform = `translateX(${peekOffset - index * (imageWidth + gap)}px)`;
+    updateActive();
   }
 
   sizeViewport();
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
