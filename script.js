@@ -18,22 +18,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- UPDATE TRACK POSITION ---
   function update() {
     const imageWidth = images[0].offsetWidth;
-    const trackWidth = images.length * (imageWidth + gap) - gap;
+    const trackWidth = images.length * imageWidth + (images.length - 1) * gap;
     const viewport = document.querySelector('.viewport');
-    const viewportWidth = viewport.offsetWidth;
-
-    let translate = -index * (imageWidth + gap);
-
-    // Ensure last images are fully visible
-    if (translate + trackWidth < viewportWidth) {
-      translate = viewportWidth - trackWidth;
-    }
-
-    track.style.transform = `translateX(${translate}px)`;
+    const maxOffset = trackWidth - viewport.offsetWidth;
+  
+    let offset = index * (imageWidth + gap) - (viewport.offsetWidth / 2 - imageWidth / 2);
+  
+    // Clamp offset so we don’t scroll past edges
+    if (offset < 0) offset = 0;
+    if (offset > maxOffset) offset = maxOffset;
+  
+    track.style.transform = `translateX(${-offset}px)`;
     track.style.transition = "transform 0.5s ease";
-
+  
     updateActive();
   }
+
 
   // --- HIGHLIGHT CENTER IMAGE ---
   function updateActive() {
@@ -89,3 +89,4 @@ document.addEventListener("DOMContentLoaded", () => {
     sizeViewport();
   });
 });
+
