@@ -3,21 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
   const gap = 10;
-  const visibleCount = 5;   // 3 full images
-  const peekRatio = 0.2;    // peek on each side
-  let index = 2;             // start with second image centered
+  const visibleFull = 5;     // number of fully visible images
+  const peekRatio = 0.2;     // peek fraction on sides
+  let index = 2;              // start center
 
   function imgWidth() {
     return images[0].offsetWidth;
   }
 
-  // Compute viewport width for 3 full images + 0.2 peek each side
+  // Set viewport width: 3 full images + 0.2 peek each side
   function sizeViewport() {
-    const vw = (3 + 2 * peekRatio) * imgWidth() + (3 - 1) * gap;
+    const vw = (visibleFull + 2 * peekRatio) * imgWidth() + (visibleFull - 1) * gap;
     viewport.style.width = `${vw}px`;
   }
 
-  // Scroll to the selected index
+  // Scroll and scale images
   function scrollToIndex(i) {
     index = Math.max(0, Math.min(images.length - 1, i));
     const viewportCenter = viewport.offsetWidth / 2;
@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateScale();
   }
 
-  // Scale images for dynamic effect
   function updateScale() {
     images.forEach((img, idx) => {
       img.style.transition = "transform 0.4s ease, opacity 0.4s ease";
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     images[index].style.transform = "scale(1)";
     images[index].style.opacity = "1";
 
-    // near images (left/right of center)
+    // immediate neighbors
     if (images[index - 1]) {
       images[index - 1].style.transform = "scale(0.9)";
       images[index - 1].style.opacity = "0.6";
@@ -51,6 +50,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (images[index + 1]) {
       images[index + 1].style.transform = "scale(0.9)";
       images[index + 1].style.opacity = "0.6";
+    }
+
+    // optional: second neighbors for more depth
+    if (images[index - 2]) {
+      images[index - 2].style.transform = "scale(0.85)";
+      images[index - 2].style.opacity = "0.4";
+    }
+    if (images[index + 2]) {
+      images[index + 2].style.transform = "scale(0.85)";
+      images[index + 2].style.opacity = "0.4";
     }
   }
 
@@ -65,4 +74,3 @@ document.addEventListener("DOMContentLoaded", () => {
   sizeViewport();
   scrollToIndex(index);
 });
-
