@@ -85,7 +85,8 @@ body {
   display: flex;
   gap: 40px;
   transition: transform 0.5s ease;
-  align-items: center;   /* vertically center images if heights differ */
+  align-items: center;
+  flex-wrap: nowrap; /* important */
 }
 
 .arrow {
@@ -100,6 +101,7 @@ body {
 .arrow:hover {
   opacity: 0.5;
 }
+
 
 
 
