@@ -1,11 +1,16 @@
-<script>
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
   const images = track.children;
 
-  const imageWidth = 300;
   const gap = 40;
-  const step = imageWidth + gap;
+
+  function getStep() {
+    return track.children[0].offsetWidth + gap;
+  }
+  
+  function update() {
+    track.style.transform = `translateX(-${index * getStep()}px)`;
+  }
 
   let index = 0;
   const visibleCount = 2;
@@ -30,8 +35,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   update();
 });
-
-</script>
-
-
-
