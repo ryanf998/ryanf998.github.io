@@ -47,10 +47,11 @@ body {
 /* All images default size */
 .artworks img {
   width: 300px;
-  height: 300px;
+  height: 325px;
   object-fit: cover;
+  display: block;
   border-radius: 5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 
@@ -115,6 +116,7 @@ body {
   top: 50%;              /* vertically center */
   transform: translateY(-50%);
 }
+
 
 
 
