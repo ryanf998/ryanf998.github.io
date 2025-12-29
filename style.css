@@ -78,13 +78,17 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; 
+  overflow: hidden;
+  padding: 0 60px; /* give room for peeks on sides */
+  box-sizing: border-box;
 }
 
 .viewport {
-  width: 760px;
   overflow: hidden;
   position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  width: auto;
 }
 
 /* Artworks container */
@@ -121,6 +125,7 @@ html, body {
   transform: translateY(-50%);
 }
 //end
+
 
 
 
