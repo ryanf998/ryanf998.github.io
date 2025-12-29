@@ -4,7 +4,105 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home • Portfolio</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body {
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+}
+
+.bio {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+  max-width: 960px;
+  padding: 0 20px;
+}
+
+.bio p:first-child { font-size: 1.4rem; margin-bottom: 12px; }
+
+.carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+}
+
+.viewport {
+  overflow: hidden;
+  position: relative;
+  width: 1000px;
+}
+
+.artworks {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  transition: transform 0.5s ease;
+}
+
+.artworks img {
+  height: 325px;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+  transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+.artworks img.side { width: 180px; opacity: 0.3; }
+.artworks img.near { width: 260px; opacity: 0.6; }
+.artworks img.active { width: 300px; opacity: 1; }
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: rgba(255,255,255,0.8);
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.arrow.left { left: 20px; }
+.arrow.right { right: 20px; }
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.lightbox .close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+</style>
 </head>
 <body>
 
