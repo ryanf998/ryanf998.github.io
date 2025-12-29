@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gap = 40;
   let index = 0;
-  const visibleCount = 2;
+  const visibleCount = 3;
 
   function stepSize() {
     return images[0].offsetWidth + gap;
@@ -37,4 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   update();
 });
+
 
