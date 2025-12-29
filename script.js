@@ -33,11 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function updateActive() {
-    [...images].forEach(img => img.classList.remove("active"));
+    [...images].forEach(img => {
+      img.classList.remove("active", "near");
+    });
   
-    const centerIndex = index + Math.floor(visibleCount / 2);
-    if (images[centerIndex]) {
-      images[centerIndex].classList.add("active");
+    const center = index + Math.floor(visibleCount / 2);
+  
+    if (images[center]) {
+      images[center].classList.add("active");
+    }
+  
+    if (images[center - 1]) {
+      images[center - 1].classList.add("near");
+    }
+    if (images[center + 1]) {
+      images[center + 1].classList.add("near");
     }
   }
   
@@ -53,4 +63,5 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
