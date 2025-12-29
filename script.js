@@ -54,8 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function update() {
     const imageWidth = images[0].offsetWidth;
     const peekOffset = 0.2 * imageWidth; // 0.2 image visible on left
-  
-    track.style.transform = `translateX(${-index * (imageWidth + gap) + peekOffset}px)`;
+    track.style.transition = "transform 0.5s ease";
     updateActive();
   }
 
@@ -91,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
 
 
