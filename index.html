@@ -122,13 +122,31 @@
   </div>
 
   <div class="artworks">
-    <img src="images/art1.jpg" alt="Artwork 1">
-    <img src="images/art4.jpg" alt="Artwork 4">
-    <img src="images/art3.jpg" alt="Artwork 3">
+    <img src="images/art1.jpg" alt="Artwork 1" onclick="openLightbox(this.src)">
+    <img src="images/art4.jpg" alt="Artwork 4" onclick="openLightbox(this.src)">
+    <img src="images/art3.jpg" alt="Artwork 3" onclick="openLightbox(this.src)">
   </div>
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="close" onclick="closeLightbox()">×</span>
+  <img id="lightbox-img" src="">
+</div>
 
+<script>
+  function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+</script>
 </body>
 </html>
+
 
 
 
