@@ -38,30 +38,33 @@ document.addEventListener("DOMContentLoaded", () => {
   
     const center = index + Math.floor(visibleCount / 2);
   
-    if (images[center]) {
-      images[center].classList.add("active");
-    }
+    const active = images[center];
+    if (!active) return;
   
-    if (images[center - 1]) {
-      images[center - 1].classList.add("near");
-    }
-    if (images[center + 1]) {
-      images[center + 1].classList.add("near");
-    }
+    active.classList.add("active");
+  
+    if (images[center - 1]) images[center - 1].classList.add("near");
+    if (images[center + 1]) images[center + 1].classList.add("near");
   }
   
   function update() {
-    const imageWidth = images[0].offsetWidth;
-    const peekOffset = peekRatio * imageWidth;
-
-    track.style.transform = `translateX(${peekOffset - index * (imageWidth + gap)}px)`;
     updateActive();
+  
+    const activeImg = track.querySelector(".active");
+    if (activeImg) {
+      activeImg.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
+      });
+    }
   }
 
   sizeViewport();
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
 
 
