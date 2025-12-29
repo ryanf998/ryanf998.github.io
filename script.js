@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
   
-
-
   // --- CLONE IMAGES FOR INFINITE LOOP ---
   let images = Array.from(track.children);
   
@@ -27,10 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
   const gap = 40;
-
   const visibleCount = 5;
   const peekRatio = 0.3;
-  let index = 0;
 
   function sizeViewport() {
     const imageWidth = images[0].offsetWidth;
@@ -90,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
   function update() {
     const imageWidth = images[0].offsetWidth;
-    const gap = 40;
   
     // translate track so the first image aligns after left peek
     const peekOffset = 0.2 * imageWidth;
@@ -103,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
 
 
