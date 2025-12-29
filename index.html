@@ -46,7 +46,13 @@
       object-fit: cover;      /* fill square without distortion */
       display: block;
       border-radius: 5px;     /* optional rounding */
-      transition: transform 0.3s;
+          /* animation setup */
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .artworks img:hover {
+      transform: scale(1.06) translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
     }
 
     /* Responsive adjustments */
@@ -157,6 +163,7 @@
 </script>
 </body>
 </html>
+
 
 
 
