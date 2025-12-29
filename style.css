@@ -61,12 +61,6 @@ html, body {
 }
 
 
-/* Larger second image (art2) */
-.artworks img.large {
-  width: 350px;
-  height: 350px;
-  object-fit: cover;
-}
 
 .artworks img:hover {
   transform: scale(1.06) translateY(-6px);  /* subtle lift effect */
@@ -127,6 +121,7 @@ html, body {
   transform: translateY(-50%);
 }
 //end
+
 
 
 
