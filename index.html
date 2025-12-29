@@ -137,15 +137,24 @@
     I’m a Mathematics student majoring in Financial Analysis and Risk Management at the University of Waterloo. I’m building a strong foundation in finance, statistics, and data analysis, with a strong interest in applying quantitative methods to real-world financial problems.
     </p>
   </div>
+  
+  <div class="carousel">
+  <button class="arrow left" onclick="prev()">←</button>
 
-  <div class="artworks">
-    <img src="images/art1.jpg" alt="Artwork 1" onclick="openLightbox(this.src)">
-    <img src="images/art4.jpg" alt="Artwork 4" onclick="openLightbox(this.src)">
-    <img src="images/art3.jpg" alt="Artwork 3" onclick="openLightbox(this.src)">
-    <img src="images/art5.jpg" alt="Artwork 5" onclick="openLightbox(this.src)">
-    <img src="images/art6.jpg" alt="Artwork 6" onclick="openLightbox(this.src)">
-    <img src="images/art7.jpg" alt="Artwork 7" onclick="openLightbox(this.src)">
+  <div class="viewport">
+    <div class="artworks" id="artworks">
+      <img src="images/art1.jpg" alt="Artwork 1" onclick="openLightbox(this.src)">
+      <img src="images/art4.jpg" alt="Artwork 4" onclick="openLightbox(this.src)">
+      <img src="images/art3.jpg" alt="Artwork 3" onclick="openLightbox(this.src)">
+      <img src="images/art5.jpg" alt="Artwork 5" onclick="openLightbox(this.src)">
+      <img src="images/art6.jpg" alt="Artwork 6" onclick="openLightbox(this.src)">
+      <img src="images/art7.jpg" alt="Artwork 7" onclick="openLightbox(this.src)">
+    </div>
   </div>
+
+  <button class="arrow right" onclick="next()">→</button>
+</div>
+
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <span class="close" onclick="closeLightbox()">×</span>
@@ -166,6 +175,7 @@
 </script>
 </body>
 </html>
+
 
 
 
