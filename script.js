@@ -1,6 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
-  const images = track.children;
+  
+
+
+  // --- CLONE IMAGES FOR INFINITE LOOP ---
+  let images = Array.from(track.children);
+  
+  // Clone last 2 images to the start
+  images.slice(-2).forEach(img => {
+    const clone = img.cloneNode(true);
+    track.insertBefore(clone, track.firstChild);
+  });
+  
+  // Clone first 2 images to the end
+  images.slice(0, 2).forEach(img => {
+    const clone = img.cloneNode(true);
+    track.appendChild(clone);
+  });
+  
+  // Re-assign images array after cloning
+  images = Array.from(track.children);
+  
+  // --- INITIAL INDEX ---
+  let index = 2; // first real image
+
+  
+  
   const gap = 40;
 
   const visibleCount = 5;
@@ -19,14 +44,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.nextSlide = function () {
     index++;
-    if (index > images.length - 3) index = 0; // wrap around
     update();
-  };
   
+    // If reached clone at the end, jump to original start
+    if (index >= images.length - 2) { // last 2 are clones
+      setTimeout(() => {
+        track.style.transition = "none"; // remove animation
+        index = 2; // first real image
+        update();
+        setTimeout(() => track.style.transition = "transform 0.5s ease", 0);
+      }, 500); // match transition duration
+    }
+  };
+
   window.prevSlide = function () {
     index--;
-    if (index < 0) index = images.length - 3; // wrap around
     update();
+  
+    // If reached clone at start, jump to original end
+    if (index < 0) { // first 2 are clones
+      setTimeout(() => {
+        track.style.transition = "none"; // remove animation
+        index = images.length - visibleCount - 2; // last real images
+        update();
+        setTimeout(() => track.style.transition = "transform 0.5s ease", 0);
+      }, 500);
+    }
   };
 
   function updateActive() {
@@ -60,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
 
 
