@@ -22,17 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const realCount = images.length - 4; // total images minus 2 start + 2 end clones
   let index = 2; // first real image
 
+  // --- SIZE VIEWPORT ---
   function sizeViewport() {
     const imageWidth = images[0].offsetWidth;
     const viewportWidth = visibleCount * imageWidth + (visibleCount - 1) * gap;
-    document.querySelector(".viewport").style.width = `${viewportWidth}px`;
+    const viewport = document.querySelector(".viewport");
+    viewport.style.width = `${viewportWidth}px`;
   }
 
+  // --- UPDATE ACTIVE IMAGE ---
   function updateActive() {
     images.forEach(img => img.classList.remove("active", "near"));
     const center = index + Math.floor(visibleCount / 2);
     const active = images[center];
-
     if (!active) return;
 
     active.classList.add("active");
@@ -40,19 +42,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (images[center + 1]) images[center + 1].classList.add("near");
   }
 
+  // --- UPDATE TRACK POSITION ---
   function update() {
     const imageWidth = images[0].offsetWidth;
-    const peekOffset = 0.2 * imageWidth; // 0.2 peek on left
+    const peekOffset = 0.2 * imageWidth; // left peek
     track.style.transform = `translateX(${-index * (imageWidth + gap) + peekOffset}px)`;
     track.style.transition = "transform 0.5s ease";
     updateActive();
   }
 
+  // --- NEXT / PREV BUTTONS ---
   window.nextSlide = function() {
     index++;
     update();
-
-    if (index >= realCount + 2) {
+    if (index >= realCount + 2) { 
       setTimeout(() => {
         track.style.transition = "none";
         index = 2;
@@ -65,8 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.prevSlide = function() {
     index--;
     update();
-
-    if (index < 2) {
+    if (index < 2) { 
       setTimeout(() => {
         track.style.transition = "none";
         index = realCount + 1;
@@ -81,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
     sizeViewport();
     update();
   });
-
-  window.addEventListener("resize", sizeViewport);
+  window.addEventListener("resize", () => {
+    sizeViewport();
+    update();
+  });
 });
