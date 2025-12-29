@@ -18,17 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.nextSlide = function () {
-    if (index < images.length - visibleCount) {
-      index++;
-      update();
-    }
+    index++;
+    if (index > images.length - 3) index = 0; // wrap around
+    update();
   };
-
+  
   window.prevSlide = function () {
-    if (index > 0) {
-      index--;
-      update();
-    }
+    index--;
+    if (index < 0) index = images.length - 3; // wrap around
+    update();
   };
 
   function updateActive() {
@@ -48,22 +46,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   function update() {
-    updateActive();
+    const imageWidth = images[0].offsetWidth;
+    const gap = 40;
   
-    const activeImg = track.querySelector(".active");
-    if (activeImg) {
-      activeImg.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest"
-      });
-    }
+    // translate track so the first image aligns after left peek
+    const peekOffset = 0.2 * imageWidth;
+    track.style.transform = `translateX(${-index * (imageWidth + gap) + peekOffset}px)`;
+  
+    updateActive();
   }
 
   sizeViewport();
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
 
 
