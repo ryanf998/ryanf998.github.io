@@ -3,27 +3,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
 
-  const gap = 40;
-  let centerIndex = 2; // start centered
+  const gap = 20;
+  const visibleCount = 5;
+  let index = 2; // center image on load
 
-  function step() {
-    return images[0].offsetWidth + gap;
+  function imageWidth() {
+    return images[0].offsetWidth;
+  }
+
+  function sizeViewport() {
+    const width =
+      visibleCount * imageWidth() +
+      (visibleCount - 1) * gap;
+
+    viewport.style.width = `${width}px`;
   }
 
   function update() {
     const viewportCenter = viewport.offsetWidth / 2;
 
-    const trackCenter =
-      centerIndex * step() + images[0].offsetWidth / 2;
+    const imageCenter =
+      index * (imageWidth() + gap) + imageWidth() / 2;
 
-    const offset = trackCenter - viewportCenter;
+    const offset = imageCenter - viewportCenter;
 
     const maxOffset =
       track.scrollWidth - viewport.offsetWidth;
 
-    const clampedOffset = Math.max(0, Math.min(offset, maxOffset));
+    const clamped = Math.max(0, Math.min(offset, maxOffset));
 
-    track.style.transform = `translateX(${-clampedOffset}px)`;
+    track.style.transform = `translateX(${-clamped}px)`;
     track.style.transition = "transform 0.45s ease";
 
     updateActive();
@@ -34,26 +43,30 @@ document.addEventListener("DOMContentLoaded", () => {
       img.classList.remove("active", "near")
     );
 
-    images[centerIndex]?.classList.add("active");
-    images[centerIndex - 1]?.classList.add("near");
-    images[centerIndex + 1]?.classList.add("near");
+    images[index]?.classList.add("active");
+    images[index - 1]?.classList.add("near");
+    images[index + 1]?.classList.add("near");
   }
 
   window.nextSlide = () => {
-    if (centerIndex < images.length - 1) {
-      centerIndex++;
+    if (index < images.length - 1) {
+      index++;
       update();
     }
   };
 
   window.prevSlide = () => {
-    if (centerIndex > 0) {
-      centerIndex--;
+    if (index > 0) {
+      index--;
       update();
     }
   };
 
-  window.addEventListener("resize", update);
+  window.addEventListener("resize", () => {
+    sizeViewport();
+    update();
+  });
 
-  update(); // initial render
+  sizeViewport();
+  update();
 });
