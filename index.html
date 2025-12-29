@@ -137,7 +137,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; 
+    overflow: hidden;
+    padding: 0 60px; /* give room for peeks on sides */
+    box-sizing: border-box;
   }
 
   .viewport {
@@ -145,7 +147,9 @@
     position: relative;
     padding: 0;
     box-sizing: border-box;
-    width: auto;
+    display: flex;
+    justify-content: center; /* centers track inside viewport */
+    width: auto; /* JS sets exact width dynamically */
   }
   .arrow {
       position: absolute;
@@ -232,6 +236,7 @@
 </script>
 </body>
 </html>
+
 
 
 
