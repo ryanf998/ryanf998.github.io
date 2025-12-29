@@ -1,37 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
-  const gap = 40; // same as in CSS
-  let index = 0;   // start at first image
+  const gap = 40;                // Gap between images
+  const visibleCount = 5;        // Fixed number of images in viewport
+  let index = 0;                  // Index of the leftmost visible image
 
+  // --- SIZE VIEWPORT ---
   function sizeViewport() {
     const imageWidth = images[0].offsetWidth;
-    const viewportWidth = Math.min(images.length, 5) * imageWidth + (Math.min(images.length,5)-1)*gap;
+    const viewportWidth = visibleCount * imageWidth + (visibleCount - 1) * gap;
     document.querySelector(".viewport").style.width = `${viewportWidth}px`;
-    update(); // ensure track is positioned correctly after resizing
   }
 
+  // --- UPDATE ACTIVE IMAGE ---
+  function updateActive() {
+    images.forEach(img => img.classList.remove("active", "near"));
+    const centerIndex = index + Math.floor(visibleCount / 2);
+    if (images[centerIndex]) {
+      images[centerIndex].classList.add("active");
+      if (images[centerIndex - 1]) images[centerIndex - 1].classList.add("near");
+      if (images[centerIndex + 1]) images[centerIndex + 1].classList.add("near");
+    }
+  }
+
+  // --- UPDATE TRACK POSITION ---
   function update() {
     const imageWidth = images[0].offsetWidth;
-    const translateX = -index * (imageWidth + gap);
+    const peekOffset = 0.2 * imageWidth; // show small peek of left image
+    track.style.transform = `translateX(${-index * (imageWidth + gap) + peekOffset}px)`;
     track.style.transition = "transform 0.5s ease";
-    track.style.transform = `translateX(${translateX}px)`;
+    updateActive();
   }
 
-  window.nextSlide = () => {
-    if (index < images.length - 5) { // stop at last full frame
+  // --- BUTTON HANDLERS ---
+  window.nextSlide = function() {
+    if (index < images.length - visibleCount) {
       index++;
       update();
     }
   };
 
-  window.prevSlide = () => {
+  window.prevSlide = function() {
     if (index > 0) {
       index--;
       update();
     }
   };
 
-  window.addEventListener("resize", sizeViewport);
-  window.onload = sizeViewport;
+  // --- INITIALIZE ---
+  sizeViewport();
+  update();
+  window.addEventListener("resize", () => {
+    sizeViewport();
+    update();
+  });
 });
