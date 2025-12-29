@@ -69,6 +69,36 @@
         height: 150px;
       }
     }
+
+  /* Lightbox overlay */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Lightbox image */
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+  
+  /* Close button */
+  .lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
   </style>
 </head>
 <body>
@@ -99,6 +129,7 @@
 
 </body>
 </html>
+
 
 
 
