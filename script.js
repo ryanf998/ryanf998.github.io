@@ -32,20 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
     updateActive();
   }
 
-  // --- BUTTON HANDLERS ---
-  window.nextSlide = function() {
-    if (index < images.length - visibleCount) {
-      index++;
-      update();
-    }
-  };
+window.nextSlide = function() {
+  if (index < images.length - visibleCount) { // stop at last visible set
+    index++;
+    update();
+  }
+};
 
-  window.prevSlide = function() {
-    if (index > 0) {
-      index--;
-      update();
-    }
-  };
+window.prevSlide = function() {
+  if (index > 0) {
+    index--;
+    update();
+  }
+};
 
   // --- INITIALIZE ---
   sizeViewport();
@@ -55,3 +54,4 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   });
 });
+
