@@ -41,6 +41,9 @@ body {
 }
 .bio p:first-child { font-size: 1.4rem; margin-bottom: 12px; }
 
+:root {
+  --gallery-width: 90vw; /* Change this once to control entire gallery width */
+}  
 /* Gallery of slices */
 .gallery {
   display: flex;
@@ -53,7 +56,7 @@ body {
 }
 
 .slice {
-  width: 50px;         
+  width: 100px;         
   height: 325px;
   overflow: hidden;    
   position: relative;
@@ -152,3 +155,4 @@ function closeLightbox() {
 
 </body>
 </html>
+
