@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     viewport.style.width = `${viewportWidth}px`;
   }
 
-  // --- UPDATE ACTIVE IMAGE ---
   function updateActive() {
     images.forEach(img => img.classList.remove("active", "near"));
   
@@ -39,12 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewport = document.querySelector('.viewport');
     const viewportCenter = viewport.offsetWidth / 2;
   
-    // Find image whose center is closest to viewport center
+    // get current translateX of track
+    const style = window.getComputedStyle(track);
+    const matrix = new WebKitCSSMatrix(style.transform); // works in Chrome, Safari
+    const currentTranslateX = matrix.m41 || 0;
+  
     let closestIndex = 0;
     let closestDist = Infinity;
   
     images.forEach((img, i) => {
-      const imgLeft = i * (imageWidth + gap) - track.offsetLeft;
+      const imgLeft = i * (imageWidth + gap) + currentTranslateX;
       const imgCenter = imgLeft + imageWidth / 2;
       const dist = Math.abs(viewportCenter - imgCenter);
   
@@ -105,5 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   });
 });
+
 
 
