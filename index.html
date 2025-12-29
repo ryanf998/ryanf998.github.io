@@ -33,13 +33,22 @@
       margin-bottom: 12px;
     }
 
-    .artworks {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      width: 100%;
-    }
+    <div class="carousel">
+      <button class="arrow left" onclick="prev()">←</button>
+
+      <div class="viewport">
+        <div class="artworks" id="artworks">
+          <img src="images/art1.jpg" onclick="openLightbox(this.src)">
+          <img src="images/art4.jpg" onclick="openLightbox(this.src)">
+          <img src="images/art3.jpg" onclick="openLightbox(this.src)">
+          <img src="images/art5.jpg" onclick="openLightbox(this.src)">
+          <img src="images/art6.jpg" onclick="openLightbox(this.src)">
+          <img src="images/art7.jpg">
+        </div>
+      </div>
+
+      <button class="arrow right" onclick="next()">→</button>
+    </div>
 
     .artworks img {
       width: 300px;           /* large width */
@@ -139,22 +148,6 @@
     </p>
   </div>
   
-  <div class="carousel">
-  <button class="arrow left" onclick="prev()">←</button>
-
-  <div class="viewport">
-    <div class="artworks" id="artworks">
-      <img src="images/art1.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art4.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art3.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art5.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art6.jpg" onclick="openLightbox(this.src)">
-      <img src="images/art7.jpg">
-    </div>
-  </div>
-
-  <button class="arrow right" onclick="next()">→</button>
-</div>
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -176,6 +169,7 @@
 </script>
 </body>
 </html>
+
 
 
 
