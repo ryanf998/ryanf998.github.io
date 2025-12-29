@@ -1,245 +1,187 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="script.js" defer></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home • Portfolio</title>
-  <style>
-    body {
-      background: #fff;
-      color: #000;
-      font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      width: 100%;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home • Portfolio</title>
+<style>
+body {
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+}
 
-    /* Bio text */
-    .bio {
-      text-align: center;
-      margin-top: 10px;
-      margin-bottom: 25px;
-      font-size: 1.05rem;
-      max-width: 960px;    /* prevents edge-to-edge text */
-      padding: 0 20px;     /* breathing room on small screens */
-    }
+.bio {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+  max-width: 960px;
+  padding: 0 20px;
+}
 
-    /* Bio headline */
-    .bio p:first-child {
-      font-size: 1.4rem;   /* keeps the intro prominent */
-      margin-bottom: 12px;
-    }
+.bio p:first-child { font-size: 1.4rem; margin-bottom: 12px; }
 
-    .artworks {
-      display: flex;
-      gap: 10px;
-      flex-wrap: nowrap;
-      transition: transform 0.5s ease;
-      
-    }
-    
-    .artworks img {
-      width: 300px;           /* large width */
-      height: 325px;          /* force square */
-      object-fit: cover;      /* fill square without distortion */
-      display: block;
-      border-radius: 5px;     /* optional rounding */
-          /* animation setup */
-      transition: transform 0.4s ease, opacity 0.4s ease;
-      opacity: 0.35;
-    }
+.carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+}
 
-    .artworks img.near {
-      width: 300px
-      opacity: 0.6;
-    }
-    
-    .artworks img.active {
-      width: 300px
-      opacity: 1;
-    }
+.viewport {
+  overflow: hidden;
+  position: relative;
+  width: auto;
+}
 
-    .artworks img:hover {
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
-      opacity: 1;
-    }
+.artworks {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  transition: transform 0.5s ease;
+}
 
-    /* Responsive adjustments */
-    @media (max-width: 1200px) {
-      .artworks img {
-        width: 350px;
-        height: 350px;
-      }
-    }
+.artworks img {
+  width: 300px;
+  height: 325px;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+}
 
-    @media (max-width: 900px) {
-      .artworks img {
-        width: 250px;
-        height: 250px;
-      }
-    }
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: rgba(255,255,255,0.8);
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+}
 
-    @media (max-width: 600px) {
-      .artworks img {
-        width: 200px;
-        height: 200px;
-      }
-    }
+.arrow.left { left: 20px; }
+.arrow.right { right: 20px; }
 
-    @media (max-width: 400px) {
-      .artworks img {
-        width: 150px;
-        height: 150px;
-      }
-    }
+/* Lightbox overlay */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 
-  /* Lightbox overlay */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  /* Lightbox image */
-  .lightbox img {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-  }
-  
-  /* Close button */
-  .lightbox .close {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    color: #fff;
-    font-size: 32px;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-  }
-    
-  .carousel {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    padding: 0; /* give room for peeks on sides */
-    box-sizing: border-box;
-  }
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
 
-  .viewport {
-    overflow: hidden;
-    position: relative;
-    width: calc((3.6 * 300px) + (3 * 40px));
-    padding: 0; /* remove extra padding for proper alignment */
-    box-sizing: border-box;
-  }
-  .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      background: rgba(255,255,255,0.8);
-      border: none;
-      cursor: pointer;
-      z-index: 20;
-  }
-
-  .arrow.left {
-    left: 20px;
-  }
-
-  .arrow.right {
-    right: 20px;
-  }
-
-
-    
-  </style>
+.lightbox .close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+</style>
 </head>
 <body>
-<div style="
-  width: 100%;
-  text-align: center;
-  margin-top: 18px;
-  white-space: nowrap;
-  font-family: Arial, Helvetica, sans-serif;
-">
-<a href="https://www.linkedin.com/in/ryan-fang-uw/" class="linkedin" target="_blank">
-  LinkedIn
-</a>
-&nbsp;|&nbsp;
-<a href="https://www.instagram.com/ryan.airt/" class="my-art">
-  My Art
-</a>
+
+<div style="width:100%; text-align:center; margin-top:18px;">
+  <a href="https://www.linkedin.com/in/ryan-fang-uw/" target="_blank">LinkedIn</a>
+  &nbsp;|&nbsp;
+  <a href="https://www.instagram.com/ryan.airt/" target="_blank">My Art</a>
 </div>
-  <div class="bio">
-    <p>Hi, I'm Ryan.</p>
-    <p>
-    I’m a Mathematics student majoring in Financial Analysis and Risk Management at the University of Waterloo. I’m building a strong foundation in finance, statistics, and data analysis, with a strong interest in applying quantitative methods to real-world financial problems.
-    </p>
-  </div>
 
-  <div class="carousel">
-      <button class="arrow left" onclick="prevSlide()">←</button>
-      <button class="arrow right" onclick="nextSlide()">→</button>
+<div class="bio">
+  <p>Hi, I'm Ryan.</p>
+  <p>I’m a Mathematics student majoring in Financial Analysis and Risk Management at the University of Waterloo. I’m building a strong foundation in finance, statistics, and data analysis, with a strong interest in applying quantitative methods to real-world financial problems.</p>
+</div>
 
-      <div class="viewport" id="viewport">
-        <div class="artworks" id="artworks">
-          <img src="images/art1.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art4.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art3.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art5.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art6.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art7.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art8.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art9.jpg" onclick="openLightbox(this.src)">
-          <img src="images/art10.jpg" onclick="openLightbox(this.src)">
-        </div>
-      </div>
+<div class="carousel">
+  <button class="arrow left" onclick="prevSlide()">←</button>
+  <button class="arrow right" onclick="nextSlide()">→</button>
+
+  <div class="viewport" id="viewport">
+    <div class="artworks" id="artworks">
+      <img src="images/art1.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art4.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art3.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art5.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art6.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art7.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art8.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art9.jpg" onclick="openLightbox(this.src)">
+      <img src="images/art10.jpg" onclick="openLightbox(this.src)">
     </div>
+  </div>
+</div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <span class="close" onclick="closeLightbox()">×</span>
   <img id="lightbox-img" src="">
 </div>
 
 <script>
-  function openLightbox(src) {
-    const lightbox = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    img.src = src;
-    lightbox.style.display = 'flex';
+document.addEventListener("DOMContentLoaded", () => {
+  const viewport = document.getElementById("viewport");
+  const track = document.getElementById("artworks");
+  const images = Array.from(track.children);
+  const gap = 10;
+  const visibleCount = 3;   // 3 full images
+  const peekRatio = 0.2;    // peek on each side
+  let index = 1;             // start center
+
+  function imgWidth() { return images[0].offsetWidth; }
+
+  function sizeViewport() {
+    const vw = (visibleCount + 2 * peekRatio) * imgWidth() + (visibleCount - 1) * gap;
+    viewport.style.width = `${vw}px`;
   }
 
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
+  function scrollToIndex(i) {
+    index = Math.max(0, Math.min(images.length - 1, i));
+    const viewportCenter = viewport.offsetWidth / 2;
+    const imgCenter = index * (imgWidth() + gap) + imgWidth() / 2;
+
+    viewport.scrollTo({ left: imgCenter - viewportCenter, behavior: "smooth" });
   }
+
+  window.nextSlide = () => scrollToIndex(index + 1);
+  window.prevSlide = () => scrollToIndex(index - 1);
+  window.addEventListener("resize", () => { sizeViewport(); scrollToIndex(index); });
+
+  sizeViewport();
+  scrollToIndex(index);
+});
+
+function openLightbox(src) {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
 </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
