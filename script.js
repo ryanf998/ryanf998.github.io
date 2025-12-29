@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
+  const realCount = images.length - 4; // total minus 2 clones at start + 2 at end
   
   // --- CLONE IMAGES FOR INFINITE LOOP ---
   let images = Array.from(track.children);
@@ -51,20 +52,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function update() {
     const imageWidth = images[0].offsetWidth;
-    const peekOffset = 0.2 * imageWidth;
+    const peekOffset = 0.2 * imageWidth; // 0.2 image visible on left
+  
     track.style.transform = `translateX(${-index * (imageWidth + gap) + peekOffset}px)`;
-
     updateActive();
   }
 
   window.nextSlide = function() {
     index++;
     update();
-
-    if (index >= images.length - 2) {
+  
+    if (index >= realCount + 2) { // +2 because first two are clones
       setTimeout(() => {
         track.style.transition = "none";
-        index = 2;
+        index = 2; // first real image
         update();
         setTimeout(() => track.style.transition = "transform 0.5s ease", 0);
       }, 500);
@@ -74,11 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
   window.prevSlide = function() {
     index--;
     update();
-
-    if (index < 0) {
+  
+    if (index < 2) { // first two are clones
       setTimeout(() => {
         track.style.transition = "none";
-        index = images.length - visibleCount - 2;
+        index = realCount + 1; // last real image
         update();
         setTimeout(() => track.style.transition = "transform 0.5s ease", 0);
       }, 500);
@@ -89,4 +90,5 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
   window.addEventListener("resize", sizeViewport);
 });
+
 
