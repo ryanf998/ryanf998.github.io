@@ -1,64 +1,54 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const viewport = document.querySelector(".viewport");
+  const viewport = document.getElementById("viewport");
   const track = document.getElementById("artworks");
   const images = Array.from(track.children);
-
   const gap = 10;
-  const fullVisible = 4;   // full images in the middle
-  const peekRatio = 0.2;   // left + right peek
-  let index = 0;
+  const visibleCount = 3;   // 3 full images
+  const peekRatio = 0.2;    // peek on each side
+  let index = 1;             // start center
 
-  function getImageWidth() {
-    return images[0].getBoundingClientRect().width;
-  }
+  function imgWidth() { return images[0].offsetWidth; }
 
   function sizeViewport() {
-    const imgW = getImageWidth();
-
-    const width =
-      (fullVisible + 2 * peekRatio) * imgW +
-      (fullVisible + 1) * gap;
-
-    viewport.style.width = `${width}px`;
+    const vw = (visibleCount + 2 * peekRatio) * imgWidth() + (visibleCount - 1) * gap;
+    viewport.style.width = `${vw}px`;
   }
 
-  function update() {
-    const imgW = getImageWidth();
-    const offset = index * (imgW + gap);
+  function scrollToIndex(i) {
+    index = Math.max(0, Math.min(images.length - 1, i));
+    const viewportCenter = viewport.offsetWidth / 2;
+    const imgCenter = index * (imgWidth() + gap) + imgWidth() / 2;
 
-    track.style.transform = `translateX(${-offset}px)`;
-    track.style.transition = "transform 0.5s ease";
-
-    updateActive();
+    viewport.scrollTo({ left: imgCenter - viewportCenter, behavior: "smooth" });
+    updateScale();
   }
 
-  function updateActive() {
-    images.forEach(img => img.classList.remove("active", "near"));
+  function updateScale() {
+    images.forEach((img, idx) => {
+      img.style.transition = "transform 0.4s ease, opacity 0.4s ease";
+      img.style.opacity = "0.6";
+      img.style.transform = "scale(0.85)";  // default small
+    });
 
-    images[index]?.classList.add("active");
-    images[index - 1]?.classList.add("near");
-    images[index + 1]?.classList.add("near");
+    // center image
+    images[index].style.transform = "scale(1)";
+    images[index].style.opacity = "1";
+
+    // adjacent images
+    if (images[index - 1]) { images[index - 1].style.transform = "scale(0.9)"; images[index - 1].style.opacity = "0.8"; }
+    if (images[index + 1]) { images[index + 1].style.transform = "scale(0.9)"; images[index + 1].style.opacity = "0.8"; }
   }
 
-  window.nextSlide = () => {
-    if (index < images.length - fullVisible) {
-      index++;
-      update();
-    }
-  };
+  window.nextSlide = () => scrollToIndex(index + 1);
+  window.prevSlide = () => scrollToIndex(index - 1);
 
-  window.prevSlide = () => {
-    if (index > 0) {
-      index--;
-      update();
-    }
-  };
-
-  window.addEventListener("resize", () => {
-    sizeViewport();
-    update();
-  });
+  window.addEventListener("resize", () => { sizeViewport(); scrollToIndex(index); });
 
   sizeViewport();
-  update();
+  scrollToIndex(index);
 });
+
+
+
+
+
