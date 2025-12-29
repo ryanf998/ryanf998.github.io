@@ -1,27 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("artworks");
-  let images = Array.from(track.children);
-
+  const imagesOrig = Array.from(track.children);
   const gap = 40;
   const visibleCount = 5;
   const cloneCount = 2;
 
   // --- CLONE IMAGES FOR INFINITE LOOP ---
-  images.slice(-cloneCount).forEach(img => {
+  const clonesStart = imagesOrig.slice(-cloneCount).map(img => {
     const clone = img.cloneNode(true);
     clone.dataset.clone = "true";
-    track.insertBefore(clone, track.firstChild);
+    return clone;
   });
-
-  images.slice(0, cloneCount).forEach(img => {
+  const clonesEnd = imagesOrig.slice(0, cloneCount).map(img => {
     const clone = img.cloneNode(true);
     clone.dataset.clone = "true";
-    track.appendChild(clone);
+    return clone;
   });
 
-  images = Array.from(track.children);
-  const realCount = images.length - cloneCount * 2;
+  // Clear track and re-insert correctly
+  track.innerHTML = "";
+  clonesStart.forEach(c => track.appendChild(c));
+  imagesOrig.forEach(img => track.appendChild(img));
+  clonesEnd.forEach(c => track.appendChild(c));
 
+  let images = Array.from(track.children);
+  const realCount = imagesOrig.length;
   let index = cloneCount; // first real image
 
   // --- SIZE VIEWPORT ---
@@ -34,9 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- UPDATE ACTIVE IMAGE ---
   function updateActive() {
     images.forEach(img => img.classList.remove("active", "near"));
-
     const centerIndex = index + Math.floor(visibleCount / 2);
-
     if (images[centerIndex]) {
       images[centerIndex].classList.add("active");
       if (images[centerIndex - 1]) images[centerIndex - 1].classList.add("near");
